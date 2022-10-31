@@ -31,7 +31,7 @@ var youngestEmployee = employee.OrderBy(emp => emp.Age).First();
 var oldestEmployee = employee.MaxBy(emp => emp.Age);
 var youngestEmployee = employee.MinBy(emp => emp.Age);
 
-# 2. Chunk Methos -
+# 2. Chunk Methos
 
 IEnumerable<Employee[]> cluster = employee.Chunk(2);
 // Print each cluster.
@@ -43,7 +43,7 @@ foreach(var employee in cluster)
 // Cluster of Shashank,Ram
 // Cluster of Sohan,Raman
 
-# 3. New methods DistinctBy, UnionBy, IntersectBy, and ExceptBy -
+# 3. New methods DistinctBy, UnionBy, IntersectBy, and ExceptBy
 
 var evenAgedEmployee = employee.Where(emp => emp.Age % 2 == 0); //Shashank,Ram,Sohan
 
@@ -53,7 +53,7 @@ var union = evenAgedEmployee.UnionBy(employeeAbove35, x => x.Age); //Shashank,Ra
 
 var intersection = evenAgedEmployee.IntersectBy(employeeAbove35.Select(p => p.Age), x => x.Age); //Shashank,Ram
 
-# 4. The ElementAt operator now takes indices from the end. -
+# 4. The ElementAt operator now takes indices from the end
 
 var secondLastEmployee = employee.ElementAt(^2); // "Sohan"
 
@@ -70,3 +70,16 @@ var takeLast2Employee = employee.Take(^2..); //Sohan,Raman
 var skipLast3Employee = employee.Take(..^3); //Shashank
 
 var takeLast3SkipLast2 = employee.Take(^3..^2); //Ram
+    
+# 6. Default parameters for FirstOrDefault, LastOrDefault, and SingleOrDefault
+    Current FirstOrDefault, LastOrDefault, and SingleOrDefault methods return default(T) if the source IEnumerable is empty. The new overloads accept a parameter         which will be returned if source is empty.
+var = new List<int>();
+int value = employee.FirstOrDefault(-4); //-4 instead of 0
+# 7. Zip supports 3 IEnumerables
+    Before .NET 6, Zip used to take only 2 parameters. Now it takes 3 parameters:
+    
+    var  ids = Enumerable.Range(1, 4);
+    var allEmployee = employee;
+    var allAges = employee.Select(emp => emp.Age);
+    IEnumerable<(int Id, Employee person, int Age)> zipped = ids.Zip(allEmployee, allAges);
+    
