@@ -31,7 +31,7 @@ var youngestEmployee = employee.OrderBy(emp => emp.Age).First();
 var oldestEmployee = employee.MaxBy(emp => emp.Age);
 var youngestEmployee = employee.MinBy(emp => emp.Age);
 
-# Chunk Methos -
+# 2. Chunk Methos -
 
 IEnumerable<Employee[]> cluster = employee.Chunk(2);
 // Print each cluster.
@@ -43,7 +43,7 @@ foreach(var employee in cluster)
 // Cluster of Shashank,Ram
 // Cluster of Sohan,Raman
 
-New methods DistinctBy, UnionBy, IntersectBy, and ExceptBy -
+# 3. New methods DistinctBy, UnionBy, IntersectBy, and ExceptBy -
 
 var evenAgedEmployee = employee.Where(emp => emp.Age % 2 == 0); //Shashank,Ram,Sohan
 
@@ -53,11 +53,11 @@ var union = evenAgedEmployee.UnionBy(employeeAbove35, x => x.Age); //Shashank,Ra
 
 var intersection = evenAgedEmployee.IntersectBy(employeeAbove35.Select(p => p.Age), x => x.Age); //Shashank,Ram
 
-The ElementAt operator now takes indices from the end. -
+# 4. The ElementAt operator now takes indices from the end. -
 
 var secondLastEmployee = employee.ElementAt(^2); // "Sohan"
 
-Skip and Take now take Range as well:
+# 5. Skip and Take now take Range as well:
 
 var take3Employee = employee.Take(..3); //Shashank,Ram,Sohan
 
